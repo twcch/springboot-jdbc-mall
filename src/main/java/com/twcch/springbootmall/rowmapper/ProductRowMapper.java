@@ -1,5 +1,6 @@
 package com.twcch.springbootmall.rowmapper;
 
+import com.twcch.springbootmall.constant.ProductCategory;
 import com.twcch.springbootmall.model.Product;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -14,7 +15,13 @@ public class ProductRowMapper implements RowMapper<Product> {
         Product product = new Product();
         product.setProductId(rs.getInt("product_id"));
         product.setProductName(rs.getString("product_name"));
-        product.setProductCategory(rs.getString("product_category"));
+
+        String categoryStr = rs.getString("product_category");
+        ProductCategory productCategory = ProductCategory.valueOf(categoryStr); // 將 String 轉換成 Enum
+        product.setProductCategory(productCategory);
+
+        // product.setProductCategory(ProductCategory.valueOf(rs.getString("product_category")));
+
         product.setProductImageUrl(rs.getString("product_image_url"));
         product.setProductPrice(rs.getInt("product_price"));
         product.setProductStock(rs.getInt("product_stock"));

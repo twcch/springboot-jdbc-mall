@@ -1,12 +1,14 @@
 package com.twcch.springbootmall.model;
 
+import com.twcch.springbootmall.constant.ProductCategory;
+
 import java.util.Date;
 
 public class Product {
 
     private int productId;
     private String productName;
-    private String productCategory;
+    private ProductCategory productCategory;
     private String productImageUrl;
     private int productPrice;
     private int productStock;
@@ -30,11 +32,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductCategory() {
+    public ProductCategory getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(String productCategory) {
+    public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
     }
 
