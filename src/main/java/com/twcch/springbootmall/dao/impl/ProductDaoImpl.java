@@ -59,8 +59,8 @@ public class ProductDaoImpl implements ProductDao {
         map.put("productDescription", productRequest.getProductDescription());
 
         Date rightNow = new Date();
-        map.put("createdDate" , rightNow);
-        map.put("lastModifiedDate" , rightNow);
+        map.put("createdDate", rightNow);
+        map.put("lastModifiedDate", rightNow);
 
         /*
          * 儲存資料庫自動生成 product_id
@@ -69,9 +69,34 @@ public class ProductDaoImpl implements ProductDao {
 
         namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map), keyHolder);
 
-        int productId= keyHolder.getKey().intValue();
+        int productId = keyHolder.getKey().intValue();
 
         return productId;
+
+    }
+
+    @Override
+    public void updateProduct(int productId, ProductRequest productRequest) {
+
+        String sql = "UPDATE product SET product_name = :productName, product_category = :productCategory, " +
+                "product_image_url = :productImageUrl, product_price = :productPrice, " +
+                "product_stock = :productStock, product_description = :productDescription, " +
+                "last_modified_date = :lastModifiedDate " +
+                "WHERE product_id = :productId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
+
+        map.put("productName", productRequest.getProductName());
+        map.put("productCategory", productRequest.getProductCategory().toString());
+        map.put("productImageUrl", productRequest.getProductImageUrl());
+        map.put("productPrice", productRequest.getProductPrice());
+        map.put("productStock", productRequest.getProductStock());
+        map.put("productDescription", productRequest.getProductDescription());
+
+        map.put("lastModifiedDate", new Date());
+
+        namedParameterJdbcTemplate.update(sql, map);
 
     }
 

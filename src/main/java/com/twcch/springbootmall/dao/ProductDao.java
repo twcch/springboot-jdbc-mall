@@ -9,4 +9,6 @@ public interface ProductDao {
 
     public Integer createProduct(ProductRequest productRequest);
 
+    public void updateProduct(int productId, ProductRequest productRequest);
+
 }

@@ -9,4 +9,6 @@ public interface ProductService {
 
     public Integer createProduct(ProductRequest productRequest);
 
+    public void updateProduct(int productId, ProductRequest productRequest);
+
 }
