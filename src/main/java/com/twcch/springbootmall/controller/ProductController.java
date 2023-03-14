@@ -74,18 +74,14 @@ public class ProductController {
     public ResponseEntity<Product> updateProduct(@PathVariable int productId,
                                                  @RequestBody @Valid ProductRequest productRequest) {
 
-        /*
-         * 檢查 product 是否存在
-         */
+        // 檢查 product 是否存在
         Product product = productService.getProductById(productId);
 
         if (product == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        /*
-         * 修改商品數據
-         */
+        // 修改商品數據
         productService.updateProduct(productId, productRequest);
 
         Product updatedProduct = productService.getProductById(productId);

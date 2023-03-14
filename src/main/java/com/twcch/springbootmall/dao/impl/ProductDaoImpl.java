@@ -90,9 +90,7 @@ public class ProductDaoImpl implements ProductDao {
         map.put("createdDate", rightNow);
         map.put("lastModifiedDate", rightNow);
 
-        /*
-         * 儲存資料庫自動生成 product_id
-         */
+        // 儲存資料庫自動生成 product_id
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map), keyHolder);
