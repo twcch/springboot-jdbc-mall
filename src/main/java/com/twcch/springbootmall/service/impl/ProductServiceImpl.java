@@ -1,7 +1,7 @@
 package com.twcch.springbootmall.service.impl;
 
-import com.twcch.springbootmall.constant.ProductCategory;
 import com.twcch.springbootmall.dao.ProductDao;
+import com.twcch.springbootmall.dto.ProductQueryParams;
 import com.twcch.springbootmall.dto.ProductRequest;
 import com.twcch.springbootmall.model.Product;
 import com.twcch.springbootmall.service.ProductService;
@@ -24,9 +24,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProducts(ProductCategory productCategory, String searchText) {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
 
-        return productDao.getProducts(productCategory, searchText);
+        return productDao.getProducts(productQueryParams);
 
     }
 

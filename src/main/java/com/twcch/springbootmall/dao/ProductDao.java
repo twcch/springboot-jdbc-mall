@@ -1,6 +1,6 @@
 package com.twcch.springbootmall.dao;
 
-import com.twcch.springbootmall.constant.ProductCategory;
+import com.twcch.springbootmall.dto.ProductQueryParams;
 import com.twcch.springbootmall.dto.ProductRequest;
 import com.twcch.springbootmall.model.Product;
 
@@ -10,7 +10,7 @@ public interface ProductDao {
 
     Product getProductById(int productId);
 
-    List<Product> getProducts(ProductCategory productCategory, String searchText);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Integer createProduct(ProductRequest productRequest);
 

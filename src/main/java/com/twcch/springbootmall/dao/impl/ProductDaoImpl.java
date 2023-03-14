@@ -1,7 +1,7 @@
 package com.twcch.springbootmall.dao.impl;
 
-import com.twcch.springbootmall.constant.ProductCategory;
 import com.twcch.springbootmall.dao.ProductDao;
+import com.twcch.springbootmall.dto.ProductQueryParams;
 import com.twcch.springbootmall.dto.ProductRequest;
 import com.twcch.springbootmall.model.Product;
 import com.twcch.springbootmall.rowmapper.ProductRowMapper;
@@ -44,7 +44,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getProducts(ProductCategory productCategory, String searchText) {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
 
         String sql = "SELECT product_id, product_name, product_category, product_image_url, product_price, " +
                 "product_stock, product_description, created_date, last_modified_date " +
@@ -52,14 +52,14 @@ public class ProductDaoImpl implements ProductDao {
 
         Map<String, Object> map = new HashMap<>();
 
-        if (productCategory != null) {
+        if (productQueryParams.getProductCategory() != null) {
             sql = sql + " AND product_category = :productCategory";
-            map.put("productCategory", productCategory.name()); // enum class to string
+            map.put("productCategory", productQueryParams.getProductCategory().name()); // enum class to string
         }
 
-        if (searchText != null) {
+        if (productQueryParams.getSearchText() != null) {
             sql = sql + " AND product_name LIKE :searchText";
-            map.put("searchText", "%" + searchText + "%");
+            map.put("searchText", "%" + productQueryParams.getSearchText() + "%");
         }
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
