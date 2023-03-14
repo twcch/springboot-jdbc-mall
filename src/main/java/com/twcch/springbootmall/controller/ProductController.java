@@ -63,4 +63,18 @@ public class ProductController {
 
     }
 
+    @DeleteMapping("/products/{productId}")
+    public ResponseEntity<Product> deleteProduct(@PathVariable int productId) {
+
+        /*
+         * 因為前端傳入 delete request 只要確認商品是否已經不存在，
+         * 不論該 product id 是否存在於資料庫，只要刪除之後必定會不存在，
+         * 無須再執行前判斷 product id 是否存在
+         */
+        productService.deleteProduct(productId);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
+    }
+
 }
