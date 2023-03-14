@@ -1,5 +1,6 @@
 package com.twcch.springbootmall.service;
 
+import com.twcch.springbootmall.constant.ProductCategory;
 import com.twcch.springbootmall.dto.ProductRequest;
 import com.twcch.springbootmall.model.Product;
 
@@ -9,7 +10,7 @@ public interface ProductService {
 
     Product getProductById(int productId);
 
-    List<Product> getProducts();
+    List<Product> getProducts(ProductCategory productCategory, String searchText);
 
     Integer createProduct(ProductRequest productRequest);
 

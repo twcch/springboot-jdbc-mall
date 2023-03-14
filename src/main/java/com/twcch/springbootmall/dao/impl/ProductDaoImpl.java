@@ -1,5 +1,6 @@
 package com.twcch.springbootmall.dao.impl;
 
+import com.twcch.springbootmall.constant.ProductCategory;
 import com.twcch.springbootmall.dao.ProductDao;
 import com.twcch.springbootmall.dto.ProductRequest;
 import com.twcch.springbootmall.model.Product;
@@ -43,12 +44,23 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getProducts(ProductCategory productCategory, String searchText) {
 
         String sql = "SELECT product_id, product_name, product_category, product_image_url, product_price, " +
-                "product_stock, product_description, created_date, last_modified_date FROM product";
+                "product_stock, product_description, created_date, last_modified_date " +
+                "FROM product WHERE 1 = 1";
 
         Map<String, Object> map = new HashMap<>();
+
+        if (productCategory != null) {
+            sql = sql + " AND product_category = :productCategory";
+            map.put("productCategory", productCategory.name()); // enum class to string
+        }
+
+        if (searchText != null) {
+            sql = sql + " AND product_name LIKE :searchText";
+            map.put("searchText", "%" + searchText + "%");
+        }
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 

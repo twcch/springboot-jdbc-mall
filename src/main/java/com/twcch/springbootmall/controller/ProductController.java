@@ -1,5 +1,6 @@
 package com.twcch.springbootmall.controller;
 
+import com.twcch.springbootmall.constant.ProductCategory;
 import com.twcch.springbootmall.dto.ProductRequest;
 import com.twcch.springbootmall.model.Product;
 import com.twcch.springbootmall.service.ProductService;
@@ -31,9 +32,11 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts() {
+    public ResponseEntity<List<Product>> getProducts(
+            @RequestParam(required = false) ProductCategory productCategory,
+            @RequestParam(required = false) String searchText) {
 
-        List<Product> productList = productService.getProducts();
+        List<Product> productList = productService.getProducts(productCategory, searchText);
 
         /*
          * 因為 RESTful API 對於資源的定義，就算 productList 無任何商品存在，
