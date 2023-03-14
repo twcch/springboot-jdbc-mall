@@ -35,6 +35,10 @@ public class ProductController {
 
         List<Product> productList = productService.getProducts();
 
+        /*
+         * 因為 RESTful API 對於資源的定義，就算 productList 無任何商品存在，
+         * 但請求 products 的資源已經存在，就算 productList.size() = 0 ，也需要回傳 OK
+         */
         return ResponseEntity.status(HttpStatus.OK).body(productList);
 
     }
