@@ -62,7 +62,9 @@ public class ProductDaoImpl implements ProductDao {
             map.put("searchText", "%" + productQueryParams.getSearchText() + "%");
         }
 
-        sql = sql + " ORDER BY " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
+        sql = sql + " ORDER BY :orderBy :sort";
+        map.put("orderBy", productQueryParams.getOrderBy());
+        map.put("sort", productQueryParams.getSort());
 
         sql = sql + " LIMIT :limit OFFSET :offset";
         map.put("limit", productQueryParams.getLimit());
