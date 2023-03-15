@@ -12,10 +12,12 @@ public interface ProductService {
 
     List<Product> getProducts(ProductQueryParams productQueryParams);
 
-    Integer createProduct(ProductRequest productRequest);
+    int createProduct(ProductRequest productRequest);
 
     void updateProduct(int productId, ProductRequest productRequest);
 
     void deleteProduct(int productId);
+
+    int countProduct(ProductQueryParams productQueryParams);
 
 }

@@ -77,7 +77,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public Integer createProduct(ProductRequest productRequest) {
+    public int createProduct(ProductRequest productRequest) {
 
         String sql = "INSERT INTO product(product_name, product_category, product_image_url, product_price, " +
                 "product_stock, product_description, created_date, last_modified_date) " +
@@ -141,6 +141,29 @@ public class ProductDaoImpl implements ProductDao {
         map.put("productId", productId);
 
         namedParameterJdbcTemplate.update(sql, map);
+
+    }
+
+    @Override
+    public int countProduct(ProductQueryParams productQueryParams) {
+
+        String sql = "SELECT count(*) FROM product WHERE 1 = 1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        if (productQueryParams.getProductCategory() != null) {
+            sql = sql + " AND product_category = :productCategory";
+            map.put("productCategory", productQueryParams.getProductCategory().name()); // enum class to string
+        }
+
+        if (productQueryParams.getSearchText() != null) {
+            sql = sql + " AND product_name LIKE :searchText";
+            map.put("searchText", "%" + productQueryParams.getSearchText() + "%");
+        }
+
+        Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+
+        return total.intValue();
 
     }
 

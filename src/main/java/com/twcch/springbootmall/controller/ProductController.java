@@ -5,6 +5,7 @@ import com.twcch.springbootmall.dto.ProductQueryParams;
 import com.twcch.springbootmall.dto.ProductRequest;
 import com.twcch.springbootmall.model.Product;
 import com.twcch.springbootmall.service.ProductService;
+import com.twcch.springbootmall.util.Page;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -37,7 +38,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getProducts(
+    public ResponseEntity<Page<Product>> getProducts(
 
             // 查詢條件 Filtering
             @RequestParam(required = false) ProductCategory productCategory,
@@ -61,11 +62,21 @@ public class ProductController {
 
         List<Product> productList = productService.getProducts(productQueryParams);
 
+        // 取得 product 總數
+        int total = productService.countProduct(productQueryParams);
+
+        // 分頁
+        Page<Product> page = new Page<>();
+        page.setLimit(limit);
+        page.setOffset(offset);
+        page.setTotal(total);
+        page.setResult(productList);
+
         /*
          * 因為 RESTful API 對於資源的定義，就算 productList 無任何商品存在，
          * 但請求 products 的資源已經存在，就算 productList.size() = 0 ，也需要回傳 OK
          */
-        return ResponseEntity.status(HttpStatus.OK).body(productList);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
 
     }
 

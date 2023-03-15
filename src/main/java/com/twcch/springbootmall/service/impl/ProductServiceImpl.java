@@ -31,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Integer createProduct(ProductRequest productRequest) {
+    public int createProduct(ProductRequest productRequest) {
 
         return productDao.createProduct(productRequest);
 
@@ -48,6 +48,13 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(int productId) {
 
         productDao.deleteProduct(productId);
+
+    }
+
+    @Override
+    public int countProduct(ProductQueryParams productQueryParams) {
+
+        return productDao.countProduct(productQueryParams);
 
     }
 
