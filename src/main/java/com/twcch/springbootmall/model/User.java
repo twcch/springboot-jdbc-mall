@@ -1,7 +1,6 @@
 package com.twcch.springbootmall.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonKey;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
