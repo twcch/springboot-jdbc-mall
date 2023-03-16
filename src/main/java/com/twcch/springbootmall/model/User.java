@@ -1,13 +1,22 @@
 package com.twcch.springbootmall.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonKey;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 
 public class User {
 
     private int userId;
     private String userName;
+
+    @JsonIgnore
     private String userPassword;
+
+    @JsonProperty("email")
     private String userEmail;
+
     private Date createdDate;
     private Date lastModifiedDate;
 

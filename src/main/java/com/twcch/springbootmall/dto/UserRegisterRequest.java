@@ -1,5 +1,6 @@
 package com.twcch.springbootmall.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class UserRegisterRequest {
@@ -9,6 +10,7 @@ public class UserRegisterRequest {
     @NotBlank
     private String userPassword;
     @NotBlank
+    @Email
     private String userEmail;
 
     public String getUserName() {
