@@ -1,5 +1,6 @@
 package com.twcch.springbootmall.controller;
 
+import com.twcch.springbootmall.dto.UserLoginRequest;
 import com.twcch.springbootmall.dto.UserRegisterRequest;
 import com.twcch.springbootmall.model.User;
 import com.twcch.springbootmall.service.UserService;
@@ -23,6 +24,15 @@ public class UserController {
         int userId = userService.register(userRegisterRequest);
 
         User user = userService.getUserById(userId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+
+    }
+
+    @PostMapping("users/login")
+    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
+
+        User user = userService.login(userLoginRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
 

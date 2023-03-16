@@ -1,6 +1,7 @@
 package com.twcch.springbootmall.service.impl;
 
 import com.twcch.springbootmall.dao.UserDao;
+import com.twcch.springbootmall.dto.UserLoginRequest;
 import com.twcch.springbootmall.dto.UserRegisterRequest;
 import com.twcch.springbootmall.model.User;
 import com.twcch.springbootmall.service.UserService;
@@ -40,6 +41,26 @@ public class UserServiceImpl implements UserService {
 
         // 創建帳號
         return userDao.createUser(userRegisterRequest);
+
+    }
+
+    @Override
+    public User login(UserLoginRequest userLoginRequest) {
+
+        User user = userDao.getUserByName(userLoginRequest.getUserName());
+
+        // 檢核 user name 是否已經存在
+        if (user == null) {
+            log.warn("該 user name: {} 尚未被註冊", userLoginRequest.getUserName());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if (user.getUserPassword().equals(userLoginRequest.getUserPassword())) {
+            return user;
+        } else {
+            log.warn("該 user: {} 的密碼不正確", userLoginRequest.getUserName());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
 
     }
 
