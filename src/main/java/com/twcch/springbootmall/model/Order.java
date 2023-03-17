@@ -1,6 +1,7 @@
 package com.twcch.springbootmall.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 
@@ -9,6 +10,9 @@ public class Order {
     private int totalAmount;
     private Date createdDate;
     private Date lastModifiedDate;
+
+    // 擴充 class 供 getOrderById Service 使用
+    private List<OrderItem> orderItemList;
 
     public int getOrderId() {
         return orderId;
@@ -48,6 +52,14 @@ public class Order {
 
     public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public List<OrderItem> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(List<OrderItem> orderItemList) {
+        this.orderItemList = orderItemList;
     }
 
 }
