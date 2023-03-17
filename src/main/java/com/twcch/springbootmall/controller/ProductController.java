@@ -70,7 +70,7 @@ public class ProductController {
         page.setLimit(limit);
         page.setOffset(offset);
         page.setTotal(total);
-        page.setResult(productList);
+        page.setResults(productList);
 
         /*
          * 因為 RESTful API 對於資源的定義，就算 productList 無任何商品存在，
