@@ -3,6 +3,7 @@ package com.twcch.springbootmall.controller;
 import com.twcch.springbootmall.dto.CreateOrderRequest;
 import com.twcch.springbootmall.model.Order;
 import com.twcch.springbootmall.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class OrderController {
 
     @PostMapping("/users/{userId}/orders")
     public ResponseEntity<?> createOrder(@PathVariable int userId,
-                                         @RequestBody CreateOrderRequest createOrderRequest) {
+                                         @RequestBody @Valid CreateOrderRequest createOrderRequest) {
 
         int orderId = orderService.createOrder(userId, createOrderRequest);
 
