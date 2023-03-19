@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         User userName = userDao.getUserByName(userRegisterRequest.getUserName());
 
         if (userName != null) {
-            log.warn("該 user name: {} 已經被註冊", userRegisterRequest.getUserName());
+            log.warn("該使用者名稱: {} 已經被使用", userRegisterRequest.getUserName());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         User userEmail = userDao.getUserByEmail(userRegisterRequest.getUserEmail());
 
         if (userEmail != null) {
-            log.warn("該 user email: {} 已經被註冊", userRegisterRequest.getUserEmail());
+            log.warn("該信箱: {} 已經被使用", userRegisterRequest.getUserEmail());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
         // 檢核 user name 是否已經存在
         if (user == null) {
-            log.warn("該 user name: {} 尚未被註冊", userLoginRequest.getUserName());
+            log.warn("該使用者名稱: {} 尚未被註冊", userLoginRequest.getUserName());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
         if (user.getUserPassword().equals(hasdedPassword)) {
             return user;
         } else {
-            log.warn("該 user: {} 的密碼不正確", userLoginRequest.getUserName());
+            log.warn("該使用者: {} 的密碼不正確", userLoginRequest.getUserName());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 

@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
         User user = userDao.getUserById(userId);
 
         if (user == null) {
-            log.warn("該 user id {} 不存在", userId);
+            log.warn("該使用者ID: {} 不存在", userId);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
@@ -56,10 +56,10 @@ public class OrderServiceImpl implements OrderService {
 
             // 檢查 product 是否存在、庫存是否足夠
             if (product == null) {
-                log.warn("商品 {} 不存在", buyItem.getProductId());
+                log.warn("商品ID: {} 不存在", buyItem.getProductId());
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
             } else if (product.getProductStock() < buyItem.getQuantity()) {
-                log.warn("商品 {} 庫存數量不足，無法購買。剩餘庫存 {}，欲購買數量 {}", buyItem.getProductId(), product.getProductStock(), buyItem.getQuantity());
+                log.warn("商品ID: {} 庫存數量不足，無法購買。庫存剩餘: {}，欲購買數量: {}", buyItem.getProductId(), product.getProductStock(), buyItem.getQuantity());
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
             }
 
