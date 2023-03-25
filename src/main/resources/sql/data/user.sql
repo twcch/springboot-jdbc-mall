@@ -1,0 +1,1 @@
+UPDATE mysql_mall.user SET user_name = 'twcch1218', user_password = '377f6765773c5214a281bbbed39224fc', user_email = 'twcch1218@gmail.com', created_date = '2023-03-15 23:18:37', last_modified_date = '2023-03-15 23:18:37' WHERE user_id = 1;
