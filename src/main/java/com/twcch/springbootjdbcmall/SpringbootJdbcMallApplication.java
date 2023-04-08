@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringbootJdbcMallApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootJdbcMallApplication.class, args);//
+        SpringApplication.run(SpringbootJdbcMallApplication.class, args);
     }
 
 }
