@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.twcch</groupId>
-    <artifactId>springboot-mall</artifactId>
+    <artifactId>springboot-jdbc-mall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-mall</name>
-    <description>springboot-mall</description>
+    <description>springboot-jdbc-mall</description>
     <properties>
         <java.version>17</java.version>
     </properties>
