@@ -1,4 +1,4 @@
-package com.twcch.springbootmall;
+package com.twcch.springbootjdbcmall;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
