@@ -21,12 +21,17 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
-
-
 	@Override
 	public Product getProductById(Integer productId) {
 		
 		return productDao.getProductById(productId);
+		
+	}
+
+	@Override
+	public void updateProduct(Integer productId, ProductRequest productRequest) {
+		
+		productDao.updateProduct(productId, productRequest);
 		
 	}
 	
