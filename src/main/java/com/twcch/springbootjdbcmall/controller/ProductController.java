@@ -21,8 +21,11 @@ import com.twcch.springbootjdbcmall.model.Product;
 import com.twcch.springbootjdbcmall.service.ProductService;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @RestController
+@Valid
 public class ProductController {
 	
 	@Autowired
@@ -46,13 +49,18 @@ public class ProductController {
 			@RequestParam(required = false) String search, 
 			// 排序 Sorting
 			@RequestParam(defaultValue = "created_date") String orderBy, 
-			@RequestParam(defaultValue = "DESC") String sort) {
+			@RequestParam(defaultValue = "DESC") String sort, 
+			// 分頁 Pagination
+			@RequestParam(defaultValue = "10") @Min(0) @Max(100) Integer limit, 
+			@RequestParam(defaultValue = "0") @Min(0) Integer offset) {
 		
 		ProductQueryParams productQueryParams = new ProductQueryParams();
 		productQueryParams.setCategory(category);
 		productQueryParams.setSearch(search);
 		productQueryParams.setOrderBy(orderBy);
 		productQueryParams.setSort(sort);
+		productQueryParams.setLimit(limit);
+		productQueryParams.setOffset(offset);
 		
 		List<Product> productList = productService.getProducts(productQueryParams);
 		
