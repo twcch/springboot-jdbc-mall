@@ -4,50 +4,50 @@ import java.util.List;
 
 public class Page<T> {
 
-	private Integer limit;
-	private Integer offset;
-	private Integer total;
-	private List<T> results;
+    private Integer limit;
+    private Integer offset;
+    private Integer total;
+    private List<T> results;
 
-	public Page() {
+    public Page() {
 
-	}
+    }
 
-	public Integer getLimit() {
-		return limit;
-	}
+    public Integer getLimit() {
+        return limit;
+    }
 
-	public void setLimit(Integer limit) {
-		this.limit = limit;
-	}
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }
 
-	public Integer getOffset() {
-		return offset;
-	}
+    public Integer getOffset() {
+        return offset;
+    }
 
-	public void setOffset(Integer offset) {
-		this.offset = offset;
-	}
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
 
-	public Integer getTotal() {
-		return total;
-	}
+    public Integer getTotal() {
+        return total;
+    }
 
-	public void setTotal(Integer total) {
-		this.total = total;
-	}
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
 
-	public List<T> getList() {
-		return results;
-	}
+    public List<T> getList() {
+        return results;
+    }
 
-	public void setList(List<T> results) {
-		this.results = results;
-	}
+    public void setList(List<T> results) {
+        this.results = results;
+    }
 
-	@Override
-	public String toString() {
-		return "Page [limit=" + limit + ", offset=" + offset + ", total=" + total + ", results=" + results + "]";
-	}
+    @Override
+    public String toString() {
+        return "Page [limit=" + limit + ", offset=" + offset + ", total=" + total + ", results=" + results + "]";
+    }
 
 }
