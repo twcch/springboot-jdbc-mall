@@ -2,7 +2,7 @@ package com.twcch.springbootjdbcmall.dao;
 
 import java.util.List;
 
-import com.twcch.springbootjdbcmall.constant.ProductCategory;
+import com.twcch.springbootjdbcmall.dto.ProductQueryParams;
 import com.twcch.springbootjdbcmall.dto.ProductRequest;
 import com.twcch.springbootjdbcmall.model.Product;
 
@@ -10,7 +10,7 @@ public interface ProductDao {
 	
 	public Integer createProduct(ProductRequest productRequest);
 	
-	public List<Product> getProducts(ProductCategory category, String search);
+	public List<Product> getProducts(ProductQueryParams productQueryParams);
 	
 	public Product getProductById(Integer productId);
 	

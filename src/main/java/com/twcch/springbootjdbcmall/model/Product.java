@@ -20,19 +20,6 @@ public class Product {
 
 	}
 
-	public Product(Integer productId, String productName, ProductCategory category, String imageUrl, Integer price,
-			Integer stock, String description, Date createdDate, Date lastModifiedDate) {
-		this.productId = productId;
-		this.productName = productName;
-		this.category = category;
-		this.imageUrl = imageUrl;
-		this.price = price;
-		this.stock = stock;
-		this.description = description;
-		this.createdDate = createdDate;
-		this.lastModifiedDate = lastModifiedDate;
-	}
-
 	public Integer getProductId() {
 		return productId;
 	}
