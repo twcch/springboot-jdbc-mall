@@ -16,6 +16,8 @@ public interface ProductDao {
 
     public void updateProduct(Integer productId, ProductRequest productRequest);
 
+    public void updateStock(Integer productId, Integer stock);
+
     public void deleteProductById(Integer productId);
 
     public Integer countProduct(ProductQueryParams productQueryParams);
