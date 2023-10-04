@@ -1,6 +1,7 @@
 package com.twcch.springbootjdbcmall.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
 
@@ -9,6 +10,8 @@ public class Order {
     private Integer totalAmount;
     private Date createdDate;
     private Date lastModifiedDate;
+
+    private List<OrderItem> orderItemList;
 
     public Order() {
 
@@ -54,6 +57,14 @@ public class Order {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public List<OrderItem> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(List<OrderItem> orderItemList) {
+        this.orderItemList = orderItemList;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -62,6 +73,7 @@ public class Order {
                 ", totalAmount=" + totalAmount +
                 ", createdDate=" + createdDate +
                 ", lastModifiedDate=" + lastModifiedDate +
+                ", orderItemList=" + orderItemList +
                 '}';
     }
 
