@@ -37,17 +37,22 @@ public class Page<T> {
         this.total = total;
     }
 
-    public List<T> getList() {
+    public List<T> getResults() {
         return results;
     }
 
-    public void setList(List<T> results) {
+    public void setResults(List<T> results) {
         this.results = results;
     }
 
     @Override
     public String toString() {
-        return "Page [limit=" + limit + ", offset=" + offset + ", total=" + total + ", results=" + results + "]";
+        return "Page{" +
+                "limit=" + limit +
+                ", offset=" + offset +
+                ", total=" + total +
+                ", results=" + results +
+                '}';
     }
 
 }
