@@ -3,13 +3,9 @@ package com.twcch.springbootjdbcmall.model;
 import java.util.Date;
 
 import com.twcch.springbootjdbcmall.constant.ProductCategory;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class Product {
 
     private Integer productId;
