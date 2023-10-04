@@ -1,6 +1,7 @@
 package com.twcch.springbootjdbcmall.dao.impl;
 
 import com.twcch.springbootjdbcmall.dao.OrderDao;
+import com.twcch.springbootjdbcmall.dto.OrderQueryParams;
 import com.twcch.springbootjdbcmall.model.Order;
 import com.twcch.springbootjdbcmall.model.OrderItem;
 import com.twcch.springbootjdbcmall.rowmapper.OrderItemRowMapper;
@@ -49,6 +50,21 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void createOrderItems(Integer orderId, List<OrderItem> orderItemList) {
+
+        // 使用 for loop 一條一條 sql 加入數據，效率較低
+//        for (OrderItem orderItem : orderItemList) {
+//
+//            String sql = "INSERT INTO order_item(order_id, product_id, quantity, amount) " +
+//                    "VALUES (:orderId, :productId, :quantity, :amount)";
+//
+//            Map<String, Object> map = new HashMap<>();
+//            map.put("orderId", orderId);
+//            map.put("productId", orderItem.getProductId());
+//            map.put("quantity", orderItem.getQuantity());
+//            map.put("amount", orderItem.getAmount());
+//
+//            namedParameterJdbcTemplate.update(sql, map);
+//        }
 
         // 使用 batchUpdate 一次性插入數據
         String sql = "INSERT INTO order_item (order_id, product_id, quantity, amount) " +
@@ -103,6 +119,51 @@ public class OrderDaoImpl implements OrderDao {
 
         return orderItemList;
 
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+        String sql = "SELECT order_id, user_id, total_amount, created_date, last_modified_date FROM `order` WHERE 1=1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        // 查詢條件
+        sql = addFilteringSql(sql, map, orderQueryParams);
+
+        // 排序
+        sql = sql + " ORDER BY created_date DESC";
+
+        // 分頁
+        sql = sql + " LIMIT :limit OFFSET :offset";
+        map.put("limit", orderQueryParams.getLimit());
+        map.put("offset", orderQueryParams.getOffset());
+
+        List<Order> orderList = namedParameterJdbcTemplate.query(sql, map, new OrderRowMapper());
+
+        return orderList;
+    }
+
+    @Override
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+        String sql = "SELECT count(*) FROM `order` WHERE 1=1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        // 查詢條件
+        sql = addFilteringSql(sql, map, orderQueryParams);
+
+        Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+
+        return total;
+    }
+
+    private String addFilteringSql(String sql, Map<String, Object> map, OrderQueryParams orderQueryParams) {
+        if (orderQueryParams.getUserId() != null) {
+            sql = sql + " AND user_id = :userId";
+            map.put("userId", orderQueryParams.getUserId());
+        }
+
+        return sql;
     }
 
 }
