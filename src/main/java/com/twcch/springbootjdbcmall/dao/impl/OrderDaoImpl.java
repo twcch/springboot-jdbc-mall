@@ -27,7 +27,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Integer createOrder(Integer userId, Integer totalAmount) {
 
-        String sql = "INSERT INTO `order` (user_id, total_amount, created_amount, last_modified_date) " +
+        String sql = "INSERT INTO orders (user_id, total_amount, created_amount, last_modified_date) " +
                 "VALUES (:userId, :totalAmount, :createdDate, :lastModifiedDate)";
 
         Map<String, Object> map = new HashMap<>();
@@ -54,7 +54,7 @@ public class OrderDaoImpl implements OrderDao {
         // 使用 for loop 一條一條 sql 加入數據，效率較低
 //        for (OrderItem orderItem : orderItemList) {
 //
-//            String sql = "INSERT INTO order_item(order_id, product_id, quantity, amount) " +
+//            String sql = "INSERT INTO order_items(order_id, product_id, quantity, amount) " +
 //                    "VALUES (:orderId, :productId, :quantity, :amount)";
 //
 //            Map<String, Object> map = new HashMap<>();
@@ -67,7 +67,7 @@ public class OrderDaoImpl implements OrderDao {
 //        }
 
         // 使用 batchUpdate 一次性插入數據
-        String sql = "INSERT INTO order_item (order_id, product_id, quantity, amount) " +
+        String sql = "INSERT INTO order_items (order_id, product_id, quantity, amount) " +
                 "VALUES (:orderId, :productId, :quantity, :amount)";
 
         MapSqlParameterSource[] mapSqlParameterSources = new MapSqlParameterSource[orderItemList.size()];
@@ -89,7 +89,7 @@ public class OrderDaoImpl implements OrderDao {
     public Order getOrderById(Integer orderId) {
 
         String sql = "SELECT order_id, user_id, total_amount, created_date, last_modified_date " +
-                "FROM `order` WHERE order_id = :orderId";
+                "FROM orders WHERE order_id = :orderId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("orderId", orderId);
@@ -108,8 +108,8 @@ public class OrderDaoImpl implements OrderDao {
     public List<OrderItem> getOrderItemsByOrderId(Integer orderId) {
 
         String sql = "SELECT oi.order_item_id, oi.order_id, oi.product_id, oi.quantity, oi.amount, p.product_name, " +
-                "p.image_url FROM order_item AS oi " +
-                "LEFT JOIN product AS p ON oi.product_id = p.product_id " +
+                "p.image_url FROM order_items AS oi " +
+                "LEFT JOIN products AS p ON oi.product_id = p.product_id " +
                 "WHERE oi.order_id = :orderId";
 
         Map<String, Object> map = new HashMap<>();
@@ -123,7 +123,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getOrders(OrderQueryParams orderQueryParams) {
-        String sql = "SELECT order_id, user_id, total_amount, created_date, last_modified_date FROM `order` WHERE 1=1";
+        String sql = "SELECT order_id, user_id, total_amount, created_date, last_modified_date " +
+                "FROM orders WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
@@ -145,7 +146,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Integer countOrder(OrderQueryParams orderQueryParams) {
-        String sql = "SELECT count(*) FROM `order` WHERE 1=1";
+        String sql = "SELECT count(*) FROM orders WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
